@@ -10,7 +10,7 @@ import paramiko
 from datetime import datetime
 from binascii import hexlify
 
-HOST_KEY = paramiko.RSAKey(filename='server.key')
+HOST_KEY = paramiko.RSAKey(filename='/app/server.key')
 SSH_BANNER = "SSH-2.0-OpenSSH_8.2p1 Ubuntu-4ubuntu0.1"
 
 UP_KEY = '\xb1[A'.encode()
@@ -19,10 +19,20 @@ RIGHT_KEY = '\xb1[C'.encode()
 LEFT_KEY = '\xb1[D'.encode()
 BACK_KEY = '\x7f'.encode()
 
-logging.basicConfig(
- format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
- level=logging.INFO,
-filename='ssh_honeypot.log')
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+file_handler = logging.FileHandler('ssh_honeypot.log')
+file_handler.setFormatter(formatter)
+logger.addHandler(file_handler)
+
+console_handler = logging.StreamHandler(sys.stdout)
+console_handler.setFormatter(formatter)
+logger.addHandler(console_handler)
+
+logger.info("SSH Honeypot is starting...")
 
 
 
@@ -74,6 +84,7 @@ class SshHoneypot(paramiko.ServerInterface):
                     "admin": {
                         ".bashrc": "# .bashrc\r\nalias ll='ls -l'\r\n",
                         "secrets.txt": (
+                            "\r\n"
                              "Never gonna give you up\r\n"
                              "Never gonna let you down\r\n"
                              "Never gonna run around and desert you\r\n"
@@ -82,6 +93,7 @@ class SshHoneypot(paramiko.ServerInterface):
                              "Never gonna tell a lie and hurt you!"
                         ),
                         "todolist.txt": (
+                            "\r\n"
                             "- Take car\r\n"
                             "- Go to mums\r\n"
                             "- Kill Phil, Sorry!\r\n"
@@ -117,7 +129,6 @@ class SshHoneypot(paramiko.ServerInterface):
                             "Is it possible to learn this power?\r\n"
                             "\r\n"
                             "Not from a Jedi.\r\n"
-
                         ),
                     }
                 },
@@ -160,8 +171,8 @@ class SshHoneypot(paramiko.ServerInterface):
 
     def check_auth_publickey(self, username, key):
         fingerprint = (hexlify(key.get_fingerprint()))
-        logging.info('client public key ({}): {}, username: {}, key name: {}, md5 fingerprint: {}, base64: {}, bits: {}'.format(
-                    self.client_ip, username, key.get_name(), fingerprint, key.get_base64(), key.get_bits()))
+        logging.info('client public key ({}): username: {}, key name: {}, md5 fingerprint: {}, base64: {}, bits: {}'.format(
+                    self.client_ip, username, key.get_name(), fingerprint.decode, key.get_base64(), key.get_bits()))
         return paramiko.AUTH_PARTIALLY_SUCCESSFUL
     
     def check_auth_password(self, username, password):
@@ -417,9 +428,6 @@ def handle_connection(client, addr):
                         """
                             chan.send(help_text.strip().encode() + b"\r\n")
 
-
-
-                            
 
             except Exception as err:
                 print('!!! Exception: {}: {}'.format(err.__class__, err))
