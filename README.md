@@ -14,7 +14,7 @@ ssh_honeypot_project/
 | └── ssh_honeypot.py
 ```
 ## Lets begin!
-
+Start by navigating to the folder within your chosen shell, ideally PowerShell if on Windows, or the standard Linux Terminal if on Linux.
 ### 1. Build the Docker Image
 
 ```bash
@@ -23,7 +23,7 @@ docker build -t ssh_honeypot .
 
 ### 2. Run the Docker Container
 ```bash
-docker run -d -p 2222:22 --name ssh_honeypot ssh-honeypot
+docker run -d -p 2222:2222 --name ssh_honeypot ssh-honeypot
 ```
 
 ### 3. Once running you should be able to log in with any credentials
@@ -35,7 +35,7 @@ testuser@127.0.0.1's password:
 If you exit the honeypot and want to return to it, this is necessary as the Docker container will still be attached to the port. 
 Stopping the container:
 ```bash
-docker stop ssh-honeypot
+docker stop <container_id>
 ```
 Remove the container:
 ```bash
@@ -46,7 +46,6 @@ Restart after building:
 docker build -t ssh-honeypot .
 docker run -d -p 2222:2222 --name ssh_honeypot ssh-honeypot
 ```
-
 ### 5. Commands
 Use the following for a list of commands available within the honeypot, each commands entered is logged in the log file.
 ```bash
@@ -59,7 +58,7 @@ chmod 600 server.key
 ```
 
 ## 📄 Log Output
-A big part of this project is to capture the activity within the honeypot, the results are recoreded into /app/ssh_honeypot.log inside the container. You can view them with this command:
+A big part of this project is to capture the activity within the honeypot, the results are recorded into /app/ssh_honeypot.log inside the container. You can view them with this command:
 ```bash
 docker exec -it ssh_honeypot cat /app/ssh_honeypot.log
 ```
