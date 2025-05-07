@@ -26,7 +26,12 @@ docker build -t ssh_honeypot .
 docker run -d -p 2222:22 --name ssh_honeypot ssh-honeypot
 ```
 
-### 3. Stopping and Restarting
+### 3. Once running you should be able to log in with any credentials
+```
+ssh -i server.key -p 2222 testuser@127.0.0.1
+testuser@127.0.0.1's password: 
+```
+### 4. Stopping and Restarting
 If you exit the honeypot and want to return to it, this is necessary as the Docker container will still be attached to the port. 
 Stopping the container:
 ```bash
@@ -34,12 +39,18 @@ docker stop ssh-honeypot
 ```
 Remove the container:
 ```bash
-docker rm ssh-honeypot
+docker rm <container_id>
 ```
 Restart after building:
 ```bash
 docker build -t ssh-honeypot .
-docker run -d -p 2222:22 --name ssh_honeypot ssh-honeypot
+docker run -d -p 2222:2222 --name ssh_honeypot ssh-honeypot
+```
+
+### 5. Commands
+Use the following for a list of commands available within the honeypot, each commands entered is logged in the log file.
+```bash
+help
 ```
 ## 🔐 SSH Key Permissions
 You need to ensure the server key has the correct permissions, if the key is refused, use this command:
