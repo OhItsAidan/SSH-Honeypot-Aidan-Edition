@@ -74,6 +74,7 @@ docker cp ssh_honeypot:/app/ssh_honeypot.log ./ssh_honeypot.log
 
 ### 📚 Usage
 This honeypot is for educational and research purposes only. Please use responsibly.
+I have put some Cyberpunk-themed files in here for immersion as well as some movie references, hope you recognise them!
 
 If any issues, please do not hesitate to reach me on my email - a1dankhd@gmail.com
 
