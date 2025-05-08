@@ -22,20 +22,17 @@ key_path = os.path.abspath(key_path)
 HOST_KEY = paramiko.RSAKey(filename=key_path) #Server RSA Key
 
 
-log_path = os.path.join(os.path.dirname(__file__), '..', 'ssh_honeypoy.log')
+log_path = os.path.join(os.path.dirname(__file__), '..', 'ssh_honeypot.log')
 log_path = os.path.abspath(log_path)
 
 
-
-
-HOST_KEY = paramiko.RSAKey(filename=key_path) #Server RSA Key
 SSH_BANNER = "SSH-2.0-OpenSSH_8.2p1 Ubuntu-4ubuntu0.1"
 
 UP_KEY = '\x1b[A'
 DOWN_KEY = '\x1b[B'
 RIGHT_KEY = '\x1b[C'
 LEFT_KEY = '\x1b[D'
-BACK_KEY = [b'\x80,'b'\x7f']
+BACK_KEY = '\x7f'
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -363,10 +360,10 @@ def handle_connection(client, addr):
                             break
 
                         for byte in data:
-                            if byte == (8, 127): # Backspace Key for both Linux and Windows
+                            if byte in (8, 127): # Backspace Key for both Linux and Windows
                                 if command:
                                     command = command[:-1]
-                                    chan.send(b'\x7f \x7f') # Erase character from the terminal
+                                    chan.send(b'\b \b') # Erase character from the terminal
                             elif byte in (27,): # Ignore Escape key
                                 continue
                             else:
@@ -428,7 +425,7 @@ def handle_connection(client, addr):
                         elif cmd == "ls":
                             files = server.list_files(server.cwd)
                             if files:
-                                chan.send("  ".join(files).encode() + "\r\n".encode())
+                                chan.send(("  ".join(files) + "\r\n").encode())
                             else:
                                 chan.send("".encode())
 
