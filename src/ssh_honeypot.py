@@ -16,9 +16,8 @@ from datetime import datetime
 from binascii import hexlify
 
 
-
-
-HOST_KEY = paramiko.RSAKey(filename='server.key') #Server RSA Key
+key_path = os.path.join(os.path.dirname(__file__), '../server.key')
+HOST_KEY = paramiko.RSAKey(filename=key_path) #Server RSA Key
 
 
 log_path = os.path.join(os.path.dirname(__file__), '..', 'ssh_honeypot.log')
@@ -318,7 +317,7 @@ def handle_connection(client, addr):
             # Removed channel timeout once it is open to keep it running indefinitely, can be modified to time out as desired.
             chan.settimeout(None)
 
-            # Logs the about the client's SSH session for analysis
+            # Logs the client's SSH session for analysis
             if transport.remote_mac != '':
                 logging.info('client mac ({}): {}'.format(client_ip, transport.remote_mac))
 

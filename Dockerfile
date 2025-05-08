@@ -8,7 +8,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY src/ /app/src/
 COPY server.key /app/
-COPY server.pub /app/
+COPY server.key.pub /app/
 COPY ssh_honeypot.log /app/
 
 RUN chmod 600 server.key
