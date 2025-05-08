@@ -17,9 +17,8 @@ from binascii import hexlify
 
 
 
-key_path = os.path.join(os.path.dirname(__file__), '..', 'server.key')
-key_path = os.path.abspath(key_path)
-HOST_KEY = paramiko.RSAKey(filename=key_path) #Server RSA Key
+
+HOST_KEY = paramiko.RSAKey(filename='server.key') #Server RSA Key
 
 
 log_path = os.path.join(os.path.dirname(__file__), '..', 'ssh_honeypot.log')
