@@ -1,5 +1,6 @@
 # SSH-Honeypot-Project
 This is my SSH Honeypot for CMP509 Ethical Hacking - This is one of the largest projects I have attempted so feedback is appreciated :)
+The Honeypot is mainly designed to run inside Docker, but if desired, you can also run it inside a Linux VM, or if you want to run it inside Windows, download PuTTY and connect it through SSH that way.
 
 ## 📁 File Structure
 ```
@@ -78,7 +79,8 @@ If you are running the Honeypot outside of Docker, then the log file provided sh
 - During development, there were a few issues surrounding deleting mistyped characters if using the Linux shell. If this is an issue with your experience, hitting enter and then re-typing it is the only solution, but it should be fixed now.
 
 ### 📚 Usage
-This honeypot is for educational and research purposes only. Please use responsibly.
+ - This honeypot is for educational and research purposes only. Please use it responsibly and do not expose it to the public internet.
+ - If running outside of a container, remove all instances of '/app' inside the source code so the program can find the right files.
 #
 I have put some Cyberpunk-themed files in here for immersion as well as some movie references, hope you recognise them!
 
