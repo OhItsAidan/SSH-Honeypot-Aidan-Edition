@@ -1,5 +1,5 @@
 # SSH-Honeypot-Project
-This is my SSH Honeypot for CMP509 Ethical Hacking
+This is my SSH Honeypot for CMP509 Ethical Hacking - This is one of the largest projects I have attempted so feedback is appreciated :)
 
 ## 📁 File Structure
 ```
