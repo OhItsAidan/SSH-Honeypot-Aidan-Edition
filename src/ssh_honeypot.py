@@ -116,7 +116,7 @@ class SshHoneypot(paramiko.ServerInterface):
                         ),
                         "story.txt": (
                             "\r\n"
-                            "Did you ever the tragedy of Darth Plagueis the Wise?\r\n"
+                            "Did you ever hear the tragedy of Darth Plagueis the Wise?\r\n"
                             "\r\n"
                             "No\r\n"
                             "\r\n"
