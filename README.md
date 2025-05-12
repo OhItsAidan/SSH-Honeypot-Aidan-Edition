@@ -35,7 +35,7 @@ testuser@127.0.0.1's password:
 ```
 If you make any changes to the honeypot, you will need to stop the container and rebuild it. 
 
-### 5. Commands
+### 4. Commands
 Use this command for a list of other commands available within the honeypot, each command entered is logged in the log file, so you can analyse activity.
 ```bash
 help
