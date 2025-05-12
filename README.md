@@ -1,5 +1,5 @@
 # SSH-Honeypot-Project
-This is my SSH Honeypot for CMP509 Ethical Hacking - This is one of the largest projects I have attempted so feedback is appreciated :)
+This is my SSH Honeypot for CMP509 Ethical Hacking - This is one of the largest projects I have attempted, so feedback is appreciated :)
 The Honeypot is mainly designed to run inside Docker, but if desired, you can also run it inside a Linux VM, or if you want to run it inside Windows, download PuTTY and connect it through SSH that way.
 
 ## 📁 File Structure
@@ -27,28 +27,13 @@ docker build -t ssh_honeypot .
 docker run -d -p 2222:2222 --name ssh_honeypot ssh-honeypot
 ```
 
-### 3. Once running you should be able to log in with any credentials
-It will ask you to fingerprint the server to add your machine to known hosts so it can verify you, that is fine. Once done you should be able to get in without the key.
+### 3. Once running, you should be able to log in with any credentials
+It will ask you to fingerprint the server to add your machine to known hosts so it can verify you, that is fine. Once done, you should be able to get in without the key.
 ```
 ssh -i server.key -p 2222 testuser@127.0.0.1
 testuser@127.0.0.1's password: 
 ```
-### 4. Stopping and Restarting
-If you exit the honeypot and want to return to it, this is necessary as the Docker container will still be attached to the port. 
-Stopping the container in Linux:
-```bash
-docker stop <container_id>
-```
-Remove the container:
-```bash
-docker rm <container_id>
-```
-Restart after building:
-```bash
-docker build -t ssh-honeypot .
-docker run -d -p 2222:2222 --name ssh_honeypot ssh-honeypot
-```
-If you are in Windows you can stop and start it from the Docker Dashboard.
+If you make any changes to the honeypot, you will need to stop the container and rebuild it. 
 
 ### 5. Commands
 Use this command for a list of other commands available within the honeypot, each command entered is logged in the log file, so you can analyse activity.
@@ -56,7 +41,7 @@ Use this command for a list of other commands available within the honeypot, eac
 help
 ```
 ## 🔐 SSH Key Permissions
-You need to ensure the server key has the correct permissions, if the key is refused, use this command:
+You need to ensure the server key has the correct permissions. If the key is refused, use this command:
 ```bash
 chmod 600 server.key
 ```
@@ -76,7 +61,6 @@ If you are running the Honeypot outside of Docker, then the log file provided sh
 - If you end up rebuilding often, you may need to remove the old container.
 - If a port is reported as "already allocated" look at step 3.
 - Always run Docker with sudo if your user does not have the necessary permissions.
-- During development, there were a few issues surrounding deleting mistyped characters if using the Linux shell. If this is an issue with your experience, hitting enter and then re-typing it is the only solution, but it should be fixed now.
 
 ### 📚 Usage
  - This honeypot is for educational and research purposes only. Please use it responsibly and do not expose it to the public internet.
