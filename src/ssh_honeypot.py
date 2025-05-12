@@ -191,7 +191,7 @@ class SshHoneypot(paramiko.ServerInterface):
         logging.info('client public key ({}): username: {}, key name: {}, md5 fingerprint: {}, base64: {}, bits: {}'.format(
                     self.client_ip, username, key.get_name(), fingerprint.decode, key.get_base64(), key.get_bits()))
         # Simulate partial success to get the attacker to go further into the honeypot.
-        return paramiko.AUTH_PARTIALLY_SUCCESSFUL
+        return paramiko.AUTH_SUCCESSFUL
     
     def check_auth_password(self, username, password):
         # Accept all passwords as valid by default
