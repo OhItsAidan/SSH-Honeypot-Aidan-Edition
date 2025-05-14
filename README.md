@@ -1,6 +1,6 @@
 # SSH-Honeypot-Project
 This is my SSH Honeypot for CMP509 Ethical Hacking - This is one of the largest projects I have attempted, so feedback is appreciated :)
-The Honeypot is mainly designed to run inside Docker, but if desired, you can also run it inside a Linux VM, or if you want to run it inside Windows, download PuTTY and connect it through SSH that way.
+The Honeypot is mainly designed to run inside Docker, but if desired, you can also run it inside a Linux VM, or if you want to run it inside Windows, download PuTTY and connect it through SSH that way using PowerShell.
 
 ## 📁 File Structure
 ```
