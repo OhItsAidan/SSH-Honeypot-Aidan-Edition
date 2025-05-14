@@ -59,7 +59,6 @@ If you are running the Honeypot outside of Docker, then the log file provided sh
 
 ### ⚠️ Known Issues
 - If you end up rebuilding often, you may need to remove the old container.
-- If a port is reported as "already allocated" look at step 3.
 - Always run Docker with sudo if your user does not have the necessary permissions.
 
 ### 📚 Usage
